@@ -64,6 +64,8 @@ Then run:
 Questions, issues, or feature requests: **aiteam@deccansoft.net**, or open an issue at
 https://github.com/suresh-deccansoft/openclaw-aca-plugin/issues.
 
+Privacy: see [PRIVACY.md](PRIVACY.md) — the plugin collects no data and sends nothing to its authors.
+
 ### License
 
 MIT.
