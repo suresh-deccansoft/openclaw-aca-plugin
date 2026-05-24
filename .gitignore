@@ -1,0 +1,8 @@
+# Local env / secrets — never commit
+.env
+*.env
+*.local
+
+# OS / editor noise
+.DS_Store
+*.swp

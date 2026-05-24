@@ -1,0 +1,13 @@
+# ACR Task that builds the OpenClaw image with BuildKit enabled.
+# OpenClaw's Dockerfile uses `RUN --mount=...`, which the classic ACR builder
+# (used by `az acr build`) rejects with "the --mount option requires BuildKit".
+# ACR Tasks enable BuildKit via the DOCKER_BUILDKIT=1 step env var. Building in
+# the cloud also gives a fast network, avoiding local pnpm-install timeouts.
+#   az acr run -r <ACR> -f acr-buildkit.yaml <openclaw-repo-context>
+version: v1.1.0
+steps:
+  - build: -t $Registry/openclaw:latest -f Dockerfile .
+    env:
+      - DOCKER_BUILDKIT=1
+  - push:
+      - $Registry/openclaw:latest

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "deccansoft-claude-plugins",
+  "owner": {
+    "name": "Deccansoft AI Team",
+    "email": "aiteam@deccansoft.net"
+  },
+  "description": "Claude Code plugins by Deccansoft. Includes openclaw-azure: a guided OpenClaw -> Azure Container Apps deployment.",
+  "plugins": [
+    {
+      "name": "openclaw-azure",
+      "source": "./plugins/openclaw-azure",
+      "description": "Guided, correct deployment of OpenClaw to Azure Container Apps (Telegram long-polling + LiteLLM), with a persistence wizard (cheap local+sync or premium NFS+VNet) and the hard-won Azure Files / BuildKit / IPv6 gotchas baked in.",
+      "category": "devops",
+      "keywords": ["openclaw", "azure", "container-apps", "telegram", "litellm", "deployment", "buildkit", "persistence"]
+    }
+  ]
+}

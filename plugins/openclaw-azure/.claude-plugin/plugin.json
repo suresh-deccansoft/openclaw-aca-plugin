@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin.json",
+  "name": "openclaw-azure",
+  "version": "1.0.0",
+  "description": "Deploy OpenClaw to Azure Container Apps the right way: BuildKit image build in ACR, Telegram long-polling, LiteLLM as the model backend, and a persistence wizard that avoids the Azure Files SMB hard-link trap.",
+  "author": {
+    "name": "Deccansoft AI Team",
+    "email": "aiteam@deccansoft.net"
+  },
+  "homepage": "https://github.com/deccansoft/openclaw-aca-plugin",
+  "repository": "https://github.com/deccansoft/openclaw-aca-plugin",
+  "license": "MIT",
+  "keywords": ["openclaw", "azure", "container-apps", "telegram", "litellm", "deployment", "buildkit", "persistence", "nfs"]
+}
