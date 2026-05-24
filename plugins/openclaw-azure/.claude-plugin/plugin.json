@@ -7,8 +7,8 @@
     "name": "Deccansoft AI Team",
     "email": "aiteam@deccansoft.net"
   },
-  "homepage": "https://github.com/deccansoft/openclaw-aca-plugin",
-  "repository": "https://github.com/deccansoft/openclaw-aca-plugin",
+  "homepage": "https://github.com/suresh-deccansoft/openclaw-aca-plugin",
+  "repository": "https://github.com/suresh-deccansoft/openclaw-aca-plugin",
   "license": "MIT",
   "keywords": ["openclaw", "azure", "container-apps", "telegram", "litellm", "deployment", "buildkit", "persistence", "nfs"]
 }

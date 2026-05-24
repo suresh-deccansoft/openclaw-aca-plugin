@@ -42,7 +42,7 @@ for the full explanation of why SMB can't back the state dir.
 ### Install
 
 ```shell
-/plugin marketplace add deccansoft/openclaw-aca-plugin
+/plugin marketplace add suresh-deccansoft/openclaw-aca-plugin
 /plugin install openclaw-azure@deccansoft-claude-plugins
 ```
 
@@ -58,6 +58,11 @@ Then run:
 - **`openclaw-azure-doctor`** agent — diagnoses a silent or broken deployment from the logs.
 - **Reference docs** — Azure Files limitations, persistence comparison, and the full gotchas list.
 - **Bundled scripts** — preflight, BuildKit build, both deploy paths, and log verification.
+
+### Support
+
+Questions, issues, or feature requests: **aiteam@deccansoft.net**, or open an issue at
+https://github.com/suresh-deccansoft/openclaw-aca-plugin/issues.
 
 ### License
 
