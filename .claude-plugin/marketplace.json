@@ -5,7 +5,7 @@
     "name": "Deccansoft AI Team",
     "email": "aiteam@deccansoft.net"
   },
-  "description": "Claude Code plugins by Deccansoft. Includes openclaw-azure: a guided OpenClaw -> Azure Container Apps deployment.",
+  "description": "Claude Code plugins by Deccansoft. Includes openclaw-azure: a guided OpenClaw -> Azure Container Apps deployment; and fullstack-project-setup: our locked FastAPI + React + React Native monorepo scaffold.",
   "plugins": [
     {
       "name": "openclaw-azure",
@@ -13,6 +13,13 @@
       "description": "Guided, correct deployment of OpenClaw to Azure Container Apps (Telegram long-polling + LiteLLM), with a persistence wizard (cheap local+sync or premium NFS+VNet) and the hard-won Azure Files / BuildKit / IPv6 gotchas baked in.",
       "category": "devops",
       "keywords": ["openclaw", "azure", "container-apps", "telegram", "litellm", "deployment", "buildkit", "persistence"]
+    },
+    {
+      "name": "fullstack-project-setup",
+      "source": "./plugins/fullstack-project-setup",
+      "description": "Scaffold a new full-stack project on our locked architecture: Python/FastAPI + async SQLAlchemy + Alembic + Azure PostgreSQL backend, React + React Native frontend sharing 90-100% of business logic in an Nx + pnpm monorepo, with enforced module boundaries, an 80% coverage gate, a 1000-line-per-file limit, an RFC7807 error contract, and a generated CLAUDE.md.",
+      "category": "scaffolding",
+      "keywords": ["fastapi", "react", "react-native", "monorepo", "nx", "pnpm", "alembic", "postgresql", "azure", "scaffold", "project-setup"]
     }
   ]
 }

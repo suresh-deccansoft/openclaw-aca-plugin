@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin.json",
+  "name": "fullstack-project-setup",
+  "version": "1.0.0",
+  "description": "Scaffold a new full-stack project on our locked architecture: Python/FastAPI + async SQLAlchemy + Alembic + Azure PostgreSQL backend, React + React Native frontend sharing 90-100% of business logic in an Nx + pnpm monorepo, with enforced module boundaries, an 80% coverage gate, a 1000-line-per-file limit, an RFC7807 error contract, and a generated CLAUDE.md so the rules survive into every future session.",
+  "author": {
+    "name": "Deccansoft AI Team",
+    "email": "aiteam@deccansoft.net"
+  },
+  "homepage": "https://github.com/suresh-deccansoft/deccansoft-claude-skills",
+  "repository": "https://github.com/suresh-deccansoft/deccansoft-claude-skills",
+  "license": "MIT",
+  "keywords": ["fastapi", "react", "react-native", "monorepo", "nx", "pnpm", "alembic", "postgresql", "azure", "scaffold", "project-setup"]
+}

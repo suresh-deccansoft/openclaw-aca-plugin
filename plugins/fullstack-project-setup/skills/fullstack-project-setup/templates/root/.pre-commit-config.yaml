@@ -1,0 +1,43 @@
+# Local fast-feedback layer only — see reference/architecture-decisions.md #8.
+# CI is the real, non-bypassable gate; these hooks exist so you find out
+# BEFORE pushing, not instead of CI. Install with: pre-commit install
+# --hook-type pre-push  (deliberately pre-push, not pre-commit — full
+# test+coverage is too slow to run on every commit).
+
+repos:
+  - repo: local
+    hooks:
+      - id: check-public-env
+        name: shared .env has no non-public keys (decision #4)
+        entry: node scripts/check-public-env.js
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
+
+      - id: check-file-length-python
+        name: backend files under 1000 lines (decision #9)
+        entry: python backend/scripts/check_file_length.py
+        language: system
+        files: ^backend/.*\.py$
+        stages: [pre-push]
+
+      - id: affected-lint
+        name: lint affected JS/TS projects
+        entry: pnpm lint:affected
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
+
+      - id: affected-tests-coverage
+        name: JS/TS affected tests + coverage >= 80%
+        entry: pnpm test:affected
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
+
+      - id: backend-tests-coverage
+        name: backend tests + coverage >= 80%
+        entry: bash -c "cd backend && pytest --cov --cov-fail-under=80"
+        language: system
+        pass_filenames: false
+        stages: [pre-push]

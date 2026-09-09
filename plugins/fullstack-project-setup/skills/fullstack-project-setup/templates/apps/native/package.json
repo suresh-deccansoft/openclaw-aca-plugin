@@ -1,0 +1,29 @@
+{
+  "name": "@{{PROJECT_SLUG}}/native",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "build": "expo export",
+    "test": "jest --coverage",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@{{PROJECT_SLUG}}/core": "workspace:*",
+    "@{{PROJECT_SLUG}}/env": "workspace:*",
+    "@{{PROJECT_SLUG}}/hooks": "workspace:*",
+    "@tanstack/react-query": "^5.56.2",
+    "expo": "~51.0.0",
+    "react": "18.2.0",
+    "react-native": "0.74.5"
+  },
+  "devDependencies": {
+    "@types/react": "~18.2.79",
+    "jest": "^29.7.0",
+    "jest-expo": "~51.0.3"
+  },
+  "nx": {
+    "tags": ["type:app", "scope:native"]
+  }
+}

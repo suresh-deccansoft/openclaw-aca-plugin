@@ -1,0 +1,30 @@
+{
+  "name": "{{PROJECT_SLUG}}",
+  "private": true,
+  "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev:web": "nx dev web",
+    "dev:native": "nx start native",
+    "build": "nx run-many -t build",
+    "test": "nx run-many -t test --coverage",
+    "test:affected": "nx affected -t test --coverage",
+    "lint": "nx run-many -t lint",
+    "lint:affected": "nx affected -t lint",
+    "typecheck": "nx run-many -t typecheck"
+  },
+  "devDependencies": {
+    "@nx/eslint": "19.8.0",
+    "@nx/js": "19.8.0",
+    "@nx/vite": "19.8.0",
+    "@nx/workspace": "19.8.0",
+    "eslint": "^9.9.0",
+    "eslint-plugin-boundaries": "^4.2.2",
+    "nx": "19.8.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  }
+}

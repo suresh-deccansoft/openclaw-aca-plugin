@@ -1,0 +1,13 @@
+{
+  "name": "@{{PROJECT_SLUG}}/env",
+  "version": "0.0.0",
+  "private": true,
+  "main": "src/schema.ts",
+  "types": "src/schema.ts",
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "nx": {
+    "tags": ["type:config"]
+  }
+}
