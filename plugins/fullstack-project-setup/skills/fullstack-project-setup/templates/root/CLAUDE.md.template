@@ -1,0 +1,86 @@
+# {{PROJECT_NAME}}
+
+This project follows a locked architecture standard. **Read this before
+writing any code.** These rules exist because past projects duplicated
+business logic between web and mobile, let test coverage become optional,
+and lost architectural discipline as they grew. They are enforced by
+tooling (lint, CI, pre-push hooks), not by memory — but knowing the *why*
+means you propose correct code the first time instead of finding out from a
+failing check.
+
+## Layout
+
+```
+{{PROJECT_SLUG}}/
+├── apps/
+│   ├── web/          # React (Vite). Routing + presentational components + HTML rendering ONLY.
+│   └── native/        # React Native (Expo). Navigation + presentational components + UI ONLY.
+├── packages/
+│   ├── core/          # Types, generated API client, zod schemas, pure business rules. No JSX.
+│   ├── hooks/          # All useX() orchestration: React Query, forms. No JSX.
+│   └── env/            # Validated shared env schema.
+└── backend/            # FastAPI, async SQLAlchemy, Alembic. Own tooling, outside the Nx graph.
+```
+
+## Hard rules
+
+1. **Business logic never lives in `apps/*`.** If you're writing a
+   validation rule, an API call, a data transform, or anything that isn't
+   "how does this look/navigate on this platform," it belongs in
+   `packages/core` or `packages/hooks`, not in a component. Nx's module
+   boundary lint rule will fail the build if `apps/native` imports
+   web-specific code or vice versa — don't work around it, fix the import.
+2. **`apps/web` and `apps/native` are UI only.** Web renders HTML, native
+   renders native UI. Both call the *same* shared hooks from `packages/hooks`
+   for data/async state — never reimplement fetch/query logic per platform.
+   A React Router `loader()` on web is allowed only as a 1-3 line adapter
+   around a shared query definition (`queryClient.ensureQueryData(...)`) —
+   the real logic stays in `packages/hooks`.
+3. **No file exceeds 1000 lines.** Enforced by lint (`max-lines` for TS/JS,
+   `scripts/check_file_length.py` for Python) in the pre-push hook and CI.
+   If you hit the limit, split by responsibility — don't ask for an
+   exception unless the file is genuinely generated/vendored (see
+   `.linelimit-ignore` / the ESLint override for the current exception
+   list — add to it deliberately, don't bypass the check another way).
+4. **80% test coverage, repo-wide, is a hard gate**, not a suggestion. CI
+   blocks merge below it; the pre-push hook catches it locally first. Write
+   tests alongside the code, not after.
+5. **Async SQLAlchemy: never rely on implicit lazy-loading** on a
+   relationship. It raises `MissingGreenlet` at runtime, not at write time.
+   Always use explicit `selectinload`/`joinedload`.
+6. **Every backend error is RFC 7807** (`application/problem+json`). Don't
+   invent a new error shape per endpoint — use the shared exception handlers
+   in `app/core/errors.py`. Frontend catches the generated `ApiError` type
+   from `packages/core` — never a raw `fetch` error.
+7. **Env vars:** real secrets never go in the shared `.env` — it feeds the
+   React Native bundle, which is fully decompilable/public. Only
+   `*_PUBLIC_*`-prefixed values belong there, validated through
+   `packages/env`. A pre-commit check rejects anything else added to it.
+8. **Cross-platform dependency versions are expected to diverge.** Don't
+   force `apps/web` and `apps/native` onto identical package versions.
+   Shared packages (`packages/core`, `packages/hooks`) declare
+   cross-consumed packages (React, etc.) as `peerDependencies` with a broad
+   range — never pin them tight there. If shared logic seems to need a
+   platform-only package (native storage, gestures, etc.), that's a signal
+   to define an interface and inject the platform implementation from the
+   app layer — not to import the platform package directly into shared code.
+9. **Test runners:** Vitest for `apps/web` and for `packages/*`. Jest
+   (`jest-expo`) only inside `apps/native`. Don't write `jest.fn()`-style
+   mocks in `packages/*` — ESLint will flag it.
+10. **Migrations go through Alembic**, always. Never modify the DB schema
+    by hand, and never edit a migration that's already been applied/merged
+    — write a new one.
+
+## Full rationale
+
+The `fullstack-project-setup` skill that generated this project has the
+complete decision log with self-checks and rejected alternatives for every
+rule above, in case you need to understand *why* before proposing a
+deviation: see that skill's `reference/architecture-decisions.md`.
+
+## Reference implementation
+
+The `todos` feature (backend `app/features/todos/`,
+`packages/hooks/src/queries/todos.ts`, the web `/todos` route, and the
+native `TodosScreen`) is a working end-to-end example of every rule above.
+When in doubt about how a new feature should be structured, copy its shape.

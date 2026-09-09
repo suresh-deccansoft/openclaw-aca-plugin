@@ -1,0 +1,32 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# env — real values never committed, see .env.example and decision #4
+.env
+.env.local
+*.env.local
+
+# build output
+dist/
+build/
+.expo/
+.expo-shared/
+coverage/
+.nx/cache/
+.nx/workspace-data/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# editors / os
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
